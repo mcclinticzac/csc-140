@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <algorithm> // For std::transform
+
+int main() {
+    std::string day;
+
+    // Prompt the user to enter the name of a day
+    std::cout << "Enter the name of a day: ";
+    std::getline(std::cin, day);
+
+    // Convert the input to lowercase for case-insensitivity
+    std::transform(day.begin(), day.end(), day.begin(), ::tolower);
+
+    // Determine the correct response using a switch statement
+    switch (day[0]) {
+        case 's':
+            if (day == "saturday" || day == "sunday") {
+                std::cout << "It's the weekend!" << std::endl;
+            }
+            break;
+        case 'm':
+            if (day == "monday") {
+                std::cout << "It's a weekday!" << std::endl;
+            }
+            break;
+        case 't':
+            if (day == "tuesday") {
+                std::cout << "It's a weekday!" << std::endl;
+            } else if (day == "thursday") {
+                std::cout << "It's a weekday!" << std::endl;
+            }
+            break;
+        case 'w':
+            if (day == "wednesday") {
+                std::cout << "Hump Daaaaay!" << std::endl;
+            }
+            break;
+        case 'f':
+            if (day == "friday") {
+                std::cout << "TGIF!" << std::endl;
+            }
+            break;
+        default:
+            std::cout << "It's a weekday!" << std::endl;
+            break;
+    }
+
+    return 0;
+}
