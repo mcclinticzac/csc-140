@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string fruits[5] = {"Apple", "Banana", "Cherry", "Grape", "Orange"};
+    std::string additionalFruits[2];
+
+    // Printing the initial fruits
+    for (const auto& fruit : fruits) {
+        std::cout << fruit << std::endl;
+    }
+
+    // Asking user for two additional fruits
+    std::cout << "Please enter two additional fruits:" << std::endl;
+    for (int i = 0; i < 2; ++i) {
+        std::cout << "Fruit " << (i + 1) << ": ";
+        std::cin >> additionalFruits[i];
+    }
+
+    // Printing the updated list of fruits
+    std::cout << "Updated list of fruits:" << std::endl;
+    for (const auto& fruit : fruits) {
+        std::cout << fruit << std::endl;
+    }
+    for (const auto& fruit : additionalFruits) {
+        std::cout << fruit << std::endl;
+    }
+
+    return 0;
+}
