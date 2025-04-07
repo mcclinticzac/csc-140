@@ -1,0 +1,14 @@
+#include <iostream>
+
+int main() {
+    int startNumber;
+
+    std::cout << "Enter a starting number: ";
+    std::cin >> startNumber;
+
+    for (int i = startNumber; i >= 1; --i) {
+        std::cout << i << std::endl;
+    }
+
+    return 0;
+}
