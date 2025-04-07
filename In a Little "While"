@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+
+int main() {
+    // Part 1: Random Number Guessing Game
+    srand(time(0));
+    int randomNumber = rand() % 10 + 1;
+    int userGuess = 0;
+
+    std::cout << "Guess the number (between 1 and 10): ";
+    while (true) {
+        std::cin >> userGuess;
+        if (userGuess < randomNumber) {
+            std::cout << "Too low. Try again: ";
+        } else if (userGuess > randomNumber) {
+            std::cout << "Too high. Try again: ";
+        } else {
+            std::cout << "Correct! The number was " << randomNumber << ".\n";
+            break;
+        }
+    }
+
+    // Part 2: Secret Password Validation
+    std::string password;
+    const std::string secretPassword = "C++Rocks";
+
+    std::cout << "Enter the secret password: ";
+    while (true) {
+        std::cin >> password;
+        if (password == secretPassword) {
+            std::cout << "Access Granted!\n";
+            break;
+        } else {
+            std::cout << "Incorrect. Try again: ";
+        }
+    }
+
+    return 0;
+}
