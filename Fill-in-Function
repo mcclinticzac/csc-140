@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+#include <vector> // Needed for using std::vector
+using namespace std; // Prevents us from having to use "std::"
+
+// Defining a simple Car class
+class Car {
+public:
+    // Public attributes for now; we will discuss "private" and "protected" next week
+    string VIN; // Vehicle Identification Number (should be unique for each car)
+    string make; // Car brand (e.g., Toyota, Ford)
+    string model; // Specific model (e.g., Corolla, Mustang)
+    int year; // Manufacturing year
+    double mileage; // Current mileage of the car
+    vector<string> owners; // List of previous and current owners
+
+    // Constructor to initialize a Car object
+    Car(string vin, string mk, string mdl, int yr, double miles, vector<string> ownerList) {
+        VIN = vin;
+        make = mk;
+        model = mdl;
+        year = yr;
+        mileage = miles;
+        owners = ownerList;
+    }
+
+    // Function to display car details
+    void displayInfo() {
+        cout << "VIN: " << VIN << endl;
+        cout << "Make: " << make << endl;
+        cout << "Model: " << model << endl;
+        cout << "Year: " << year << endl;
+        cout << "Mileage: " << mileage << " miles" << endl;
+        // Displaying owners
+        cout << "Owners: ";
+        for (const string& owner : owners) {
+            cout << owner << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    vector<string> previousOwners = {"Alice Smith", "Bob Johnson", "Charlie Brown", "Diana Prince"};
+    Car myCar("1HGCM82633A123456", "Honda", "Accord", 2003, 150000, previousOwners);
+    myCar.displayInfo();
+}
+
+// Data such as VIN, make, model, year, and mileage should be private.
