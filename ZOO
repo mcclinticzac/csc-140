@@ -1,0 +1,147 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+class Diet {
+public:
+    Diet(const std::string& type) : type(type) {}
+    std::string getType() const { return type; }
+private:
+    std::string type;
+};
+
+class Habitat {
+public:
+    Habitat(const std::string& description) : description(description) {}
+    std::string getDescription() const { return description; }
+private:
+    std::string description;
+};
+
+class Animal {
+public:
+    Animal(const std::string& name, int age, const std::string& species, const Diet& diet, const Habitat& habitat)
+        : name(name), age(age), species(species), diet(diet), habitat(habitat) {}
+
+    virtual void makeSound() const = 0;
+    virtual void eat() const = 0;
+
+    final void displayInfo() const {
+        std::cout << "Name: " << name << "\nAge: " << age << "\nSpecies: " << species 
+                  << "\nDiet Type: " << diet.getType() << "\nHabitat Description: " << habitat.getDescription() << std::endl;
+    }
+
+protected:
+    std::string name;
+    int age;
+    const std::string species;
+    Diet diet;
+    Habitat habitat;
+};
+
+class Lion : public Animal {
+public:
+    Lion(const std::string& name, int age, const Diet& diet, const Habitat& habitat)
+        : Animal(name, age, "Lion", diet, habitat) {}
+
+    void makeSound() const override { std::cout << "Roar!" << std::endl; }
+    void eat() const override { std::cout << name << " is eating meat." << std::endl; }
+};
+
+class Elephant : public Animal {
+public:
+    Elephant(const std::string& name, int age, const Diet& diet, const Habitat& habitat)
+        : Animal(name, age, "Elephant", diet, habitat) {}
+
+    void makeSound() const override { std::cout << "Trumpet!" << std::endl; }
+    void eat() const override { std::cout << name << " is eating grass." << std::endl; }
+};
+
+class Gnu : public Animal {
+public:
+    Gnu(const std::string& name, int age, const Diet& diet, const Habitat& habitat)
+        : Animal(name, age, "Gnu", diet, habitat) {}
+
+    void makeSound() const override { std::cout << "Moo!" << std::endl; }
+    void eat() const override { std::cout << name << " is eating shrubs." << std::endl; }
+};
+
+class Aardvark : public Animal {
+public:
+    Aardvark(const std::string& name, int age, const Diet& diet, const Habitat& habitat)
+        : Animal(name, age, "Aardvark", diet, habitat) {}
+
+    void makeSound() const override { std::cout << "Grunt!" << std::endl; }
+    void eat() const override { std::cout << name << " is eating ants." << std::endl; }
+};
+
+class ZooManagementSystem {
+public:
+    void addAnimal(Animal* animal) {
+        zoo.push_back(animal);
+    }
+
+    void makeAllAnimalsSound() const {
+        for (const auto& animal : zoo) {
+            animal->makeSound();
+        }
+    }
+
+    void displayAllInfo() const {
+        for (const auto& animal : zoo) {
+            animal->displayInfo();
+        }
+    }
+
+private:
+    std::vector<Animal*> zoo;
+};
+
+int main() {
+    Diet lionDiet("Carnivore");
+    Habitat lionHabitat("Savannah");
+
+    Diet elephantDiet("Herbivore");
+    Habitat elephantHabitat("Grassland");
+
+    Diet gnuDiet("Herbivore");
+    Habitat gnuHabitat("Plains");
+
+    Diet aardvarkDiet("Insectivore");
+    Habitat aardvarkHabitat("Savanna");
+
+    ZooManagementSystem zooSystem;
+
+    Lion* lion1 = new Lion("Leo", 5, lionDiet, lionHabitat);
+    Lion* lion2 = new Lion("Simba", 4, lionDiet, lionHabitat);
+    Elephant* elephant1 = new Elephant("Dumbo", 10, elephantDiet, elephantHabitat);
+    Elephant* elephant2 = new Elephant("Babar", 8, elephantDiet, elephantHabitat);
+    Gnu* gnu1 = new Gnu("Gnu1", 3, gnuDiet, gnuHabitat);
+    Gnu* gnu2 = new Gnu("Gnu2", 2, gnuDiet, gnuHabitat);
+    Aardvark* aardvark1 = new Aardvark("Aardy", 1, aardvarkDiet, aardvarkHabitat);
+    Aardvark* aardvark2 = new Aardvark("Aardvark2", 2, aardvarkDiet, aardvarkHabitat);
+
+    zooSystem.addAnimal(lion1);
+    zooSystem.addAnimal(lion2);
+    zooSystem.addAnimal(elephant1);
+    zooSystem.addAnimal(elephant2);
+    zooSystem.addAnimal(gnu1);
+    zooSystem.addAnimal(gnu2);
+    zooSystem.addAnimal(aardvark1);
+    zooSystem.addAnimal(aardvark2);
+
+    zooSystem.makeAllAnimalsSound();
+    zooSystem.displayAllInfo();
+
+    // Clean up memory
+    delete lion1;
+    delete lion2;
+    delete elephant1;
+    delete elephant2;
+    delete gnu1;
+    delete gnu2;
+    delete aardvark1;
+    delete aardvark2;
+
+    return 0;
+}
